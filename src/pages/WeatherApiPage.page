@@ -1,13 +1,25 @@
 <apex:page controller="WeathearPageController">
-        <apex:pageBlock title="Weather Vitebsk">
-
+    <apex:variable value="{!1}" var="index" />
+        <apex:pageBlock title="{!weather.city.name} {!weather.city.country}">
             
          <apex:pageBlockSection id="UniversityBoxSection" title="Cources Table" columns="1"> 
-             <apex:outputLabel value="{!weather.message}"></apex:outputLabel>
-            <apex:pageBlockTable value="{!weather.classProp}" var="prop" >
-               <apex:column value="{!prop.main.temp-273}" title="Temperatura "/>
-               <apex:column value="{!prop.dt_txt}"/>
-               <apex:column value="{!prop.main.sea_level}" title="sea_level"/>
+             <apex:outputLabel value="Coordinates: {!weather.city.coord.lat} - {!weather.city.coord.lon}"></apex:outputLabel>
+            <apex:pageBlockTable value="{!weather.classProp}" var="prop" title="Information" columns="4">
+               <apex:column >
+               		<apex:facet name="header">№</apex:facet>
+                	<apex:outputText value="{!index}">
+                		<apex:variable value="{!index + 1}" var="index" />                			
+               		</apex:outputText>
+			   </apex:column>
+               <apex:column value="{!prop.main.temp-273}" title="Temperatura " >
+                   <apex:facet name="header">Temperatura</apex:facet>
+                </apex:column>
+               <apex:column value="{!prop.dt_txt}">
+                   <apex:facet name="header">Date</apex:facet>
+                </apex:column>
+               <apex:column value="{!prop.main.sea_level}" title="sea_level">
+                   <apex:facet name="header">Sea level</apex:facet>
+                </apex:column>
             </apex:pageBlockTable> 
         </apex:pageBlockSection> 
     </apex:pageBlock>
